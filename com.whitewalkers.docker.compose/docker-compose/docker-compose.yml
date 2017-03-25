@@ -9,8 +9,14 @@ whitewalkers-discovery-service:
   image: whitewalkers-discovery-service:v1
   ports:
      - "8889:8889"
+  links:
+     - "whitewalkers-config-service:whitewalkersconfigserver"
   environment:
     MEM_ARGS: "-Xmx128m"
+    SERVER_PORT: "8889"
+    CONFIGSERVER_URI: "http://whitewalkersconfigserver:8888"
+    CONFIGSERVER_HOST: "whitewalkersconfigserver"
+    CONFIGSERVER_PORT: "8888"
     
 whitewalkers-query-service:
   hostname: "whitewalkersqueryservice"
@@ -74,6 +80,25 @@ whitewalkers-twitter-stream-service:
     DISCOVERYSERVER_PORT: "8889"
     DBSERVER_HOST: "whitewalkerstweetdatabase"
     DBSERVER_PORT: "27017"
+    
+whitewalkers-proxy-service:
+  hostname: "whitewalkersproxyservice"
+  image: whitewalkers-proxy-service:v1
+  ports:
+     - "9999:9999"
+  links:
+     - "whitewalkers-config-service:whitewalkersconfigserver"
+     - "whitewalkers-discovery-service:whitewalkersdiscoveryservice"
+  environment:
+    MEM_ARGS: "-Xmx128m"
+    SERVER_PORT: "9999"
+    CONFIGSERVER_URI: "http://whitewalkersconfigserver:8888"
+    CONFIGSERVER_HOST: "whitewalkersconfigserver"
+    CONFIGSERVER_PORT: "8888"
+    DISCOVERYSERVER_URI: "http://whitewalkersdiscoveryservice:8889/eureka"
+    DISCOVERYSERVER_HOST: "whitewalkersdiscoveryservice"
+    DISCOVERYSERVER_PORT: "8889"
+    
 whitewalkers-tweet-database:
   hostname: "whitewalkerstweetdatabase"
   image: mongo

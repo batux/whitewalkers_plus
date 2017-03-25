@@ -1,8 +1,6 @@
-server:
-  port: 8889
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    enableSelfPreservation: true
+spring:
+  application:
+    name: whitewalkers-discovery-service
+  cloud:
+    config:
+      uri: http://whitewalkersconfigserver:8888

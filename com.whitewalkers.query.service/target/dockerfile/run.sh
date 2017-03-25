@@ -11,7 +11,7 @@ echo "*******  Configuration Server has started"
 
 
 echo "********************************************************"
-echo "Waiting for the discovery server to start on port $DISCOSERVER_PORT"
+echo "Waiting for the discovery server to start on port $DISCOVERYSERVER_PORT"
 echo "********************************************************"
 while ! `nc -z $DISCOVERYSERVER_HOST $DISCOVERYSERVER_PORT`; do sleep 3; done
 echo "*******  Discovery Server has started"
