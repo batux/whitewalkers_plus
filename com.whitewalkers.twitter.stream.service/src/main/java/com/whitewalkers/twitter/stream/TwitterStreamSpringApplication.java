@@ -3,18 +3,21 @@ package com.whitewalkers.twitter.stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.whitewalkers.twitter.stream.service.provider.TweetStreamProvider;
 
 @SpringBootApplication
 @RestController
 @RequestMapping("/streamservice")
 @EnableEurekaClient
+@EnableCircuitBreaker
 public class TwitterStreamSpringApplication {
 
 	public static void main(String[] args) {
@@ -24,6 +27,7 @@ public class TwitterStreamSpringApplication {
 	@Autowired
 	private TweetStreamProvider tweetStreamProvider;
 
+	@HystrixCommand(fallbackMethod = "getTweetsFallback")
 	@RequestMapping(value = "/tweetstream/{action}", method = RequestMethod.GET)
 	public String manageTweetStream(@PathVariable("action") String streamAction) {
 		
@@ -48,5 +52,9 @@ public class TwitterStreamSpringApplication {
 		}
 		
 		return operationResultMessage;
+	}
+	
+	public String manageTweetStreamFallback() {
+		return "Service is unreachable now!";
 	}
 }
