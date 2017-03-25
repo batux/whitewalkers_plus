@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: whitewalkers-proxy-service
+  cloud:
+    config:
+      uri: http://whitewalkersconfigserver:8888
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://whitewalkersdiscoveryservice:8889/eureka/          
+      
