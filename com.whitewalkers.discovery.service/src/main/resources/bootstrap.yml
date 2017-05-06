@@ -3,4 +3,11 @@ spring:
     name: whitewalkers-discovery-service
   cloud:
     config:
+      uri: http://localhost:8888
+
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
       uri: http://whitewalkersconfigserver:8888

@@ -21,4 +21,4 @@ echo "*******  Discovery Server has started"
 echo "********************************************************"
 echo "Starting sc-service-client "
 echo "********************************************************"
-java $MEM_ARGS -jar /usr/local/whitewalkers-proxy-service/@project.build.finalName@.jar
+java $MEM_ARGS -Dspring.profiles.active=$PROFILE -jar /usr/local/whitewalkers-proxy-service/@project.build.finalName@.jar

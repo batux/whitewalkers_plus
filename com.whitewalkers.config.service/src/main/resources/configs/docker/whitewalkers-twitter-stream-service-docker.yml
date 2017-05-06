@@ -1,9 +1,9 @@
 server:
   port: 9092
-
-
+  
+  
 mongodb:
-  host: "localhost"
+  host: "whitewalkerstweetdatabase"
   port: 27017
   database:
     name: "twitter"

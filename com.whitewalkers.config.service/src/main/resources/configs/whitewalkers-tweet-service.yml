@@ -1,6 +1,10 @@
 server:
   port: 9090
-mongodb.host: "192.168.99.100"
-mongodb.port: 27017
-mongodb.database.name: "twitter"
-mongodb.collection.name: "tweets"
+
+mongodb:
+  host: "localhost"
+  port: 27017
+  database:
+    name: "twitter"
+  collection:
+    name: "tweets"

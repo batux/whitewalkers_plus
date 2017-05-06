@@ -17,7 +17,7 @@ import com.whitewalkers.common.dao.implementation.TweetDao;
 import com.whitewalkers.common.model.SpatialQuery;
 import com.whitewalkers.common.model.Tweet;
 import com.whitewalkers.common.mongodb.MongoDbClientManager;
-import com.whitewalkers.tweet.service.config.Configuration;
+import com.whitewalkers.tweet.service.config.mongodb.MongoDBConfiguration;
 
 @Component
 public class TweetServiceProvider {
@@ -31,7 +31,7 @@ public class TweetServiceProvider {
 	private MongoDbClientManager mongoDbClientManager;
 	
 	@Autowired
-	private Configuration configuration;
+	private MongoDBConfiguration configuration;
 	
 	public TweetServiceProvider() {
 		

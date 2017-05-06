@@ -3,12 +3,11 @@ spring:
     name: whitewalkers-query-service
   cloud:
     config:
-      uri: http://whitewalkersconfigserver:8888
+      uri: http://localhost:8888
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://whitewalkersdiscoveryservice:8889/eureka/          
-      
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://whitewalkersconfigserver:8888

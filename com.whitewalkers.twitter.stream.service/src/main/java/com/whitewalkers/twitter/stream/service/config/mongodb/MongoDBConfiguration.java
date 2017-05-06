@@ -1,10 +1,10 @@
-package com.whitewalkers.tweet.service.config;
+package com.whitewalkers.twitter.stream.service.config.mongodb;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Configuration {
+public class MongoDBConfiguration {
 
 	@Value("${mongodb.host}")
 	private String mongoDbHost;

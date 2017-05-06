@@ -29,4 +29,4 @@ echo "*******  DB server has started"
 echo "********************************************************"
 echo "Starting sc-service-client "
 echo "********************************************************"
-java $MEM_ARGS -jar /usr/local/whitewalkers-query-service/com.whitewalkers.query.service-0.0.1-SNAPSHOT.jar
+java $MEM_ARGS -Dspring.profiles.active=$PROFILE -jar /usr/local/whitewalkers-query-service/com.whitewalkers.query.service-0.0.1-SNAPSHOT.jar

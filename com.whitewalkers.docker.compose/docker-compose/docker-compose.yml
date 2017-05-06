@@ -101,7 +101,7 @@ whitewalkers-proxy-service:
     
 whitewalkers-tweet-database:
   hostname: "whitewalkerstweetdatabase"
-  image: mongo
+  image: mongo:latest
   ports:
      - "27017:27017"
   environment:

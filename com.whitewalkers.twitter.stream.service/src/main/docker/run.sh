@@ -29,4 +29,4 @@ echo "*******  DB server has started"
 echo "********************************************************"
 echo "Starting whitewalkers-twitter-stream-service "
 echo "********************************************************"
-java $MEM_ARGS -jar /usr/local/whitewalkers-twitter-stream-service/@project.build.finalName@.jar
+java $MEM_ARGS -Dspring.profiles.active=$PROFILE -jar /usr/local/whitewalkers-twitter-stream-service/@project.build.finalName@.jar

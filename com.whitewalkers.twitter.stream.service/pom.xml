@@ -56,8 +56,6 @@
 				<configuration>
 					<imageName>${docker.image.name}:${docker.image.tag}</imageName>
 					<dockerDirectory>${basedir}/target/dockerfile</dockerDirectory>
-					<dockerHost>https://192.168.99.100:2376</dockerHost>
-					<dockerCertPath>C:\Users\Eteration-1\.docker\machine\machines\default</dockerCertPath>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>

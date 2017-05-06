@@ -11,4 +11,4 @@ echo "*******  Configuration Server has started"
 echo "********************************************************"
 echo "Starting discovery server "
 echo "********************************************************"
-java $MEM_ARGS -jar /usr/local/whitewalkers-discovery-service/@project.build.finalName@.jar
+java $MEM_ARGS -Dspring.profiles.active=$PROFILE -jar /usr/local/whitewalkers-discovery-service/@project.build.finalName@.jar

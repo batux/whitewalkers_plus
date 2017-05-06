@@ -17,7 +17,7 @@ import com.whitewalkers.common.dao.implementation.QueryDao;
 import com.whitewalkers.common.model.QueryHolder;
 import com.whitewalkers.common.model.QuerySelectBoxItem;
 import com.whitewalkers.common.mongodb.MongoDbClientManager;
-import com.whitewalkers.query.service.config.Configuration;
+import com.whitewalkers.query.service.config.mongodb.MongoDBConfiguration;
 
 @Component
 public class QueryServiceProvider {
@@ -30,7 +30,7 @@ public class QueryServiceProvider {
 	private MongoDbClientManager mongoDbClientManager;
 	
 	@Autowired
-	private Configuration configuration;
+	private MongoDBConfiguration configuration;
 	
 	public QueryServiceProvider() {
 		
