@@ -1,0 +1,24 @@
+server:
+  port: 9094
+  
+  
+spring:
+  jpa:
+    database: "POSTGRESQL"
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+    show-sql: "true"
+    generate-ddl: "true"
+    hibernate:
+      ddl-auto: "create"
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"
+  datasource:
+    platform: "postgres"
+    url: "jdbc:postgresql://localhost:5432/userdb"
+    username: "postgres"
+    password: "postgres"
+    testWhileIdle: "true"
+    validationQuery: "SELECT 1"
+  database:
+    driverClassName: "org.postgresql.Driver"
