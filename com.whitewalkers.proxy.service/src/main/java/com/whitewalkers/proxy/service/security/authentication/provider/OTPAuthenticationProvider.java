@@ -7,17 +7,9 @@ import org.springframework.security.core.AuthenticationException;
 
 import com.whitewalkers.proxy.service.security.authentication.token.OTPAuthenticationToken;
 
-public class OTPAuthenticationProvider implements AuthenticationProvider, AuthenticationTokenProvider {
 
-	private AuthenticationProvider previousAuthenticationProvider;
-	
-	private OTPAuthenticationToken otpAuthentication;
-	
-	
-	public OTPAuthenticationProvider(AuthenticationProvider previousAuthenticationProvider) {
-		this.previousAuthenticationProvider = previousAuthenticationProvider;
-	}
-	
+public class OTPAuthenticationProvider implements AuthenticationProvider {
+
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
@@ -25,22 +17,11 @@ public class OTPAuthenticationProvider implements AuthenticationProvider, Authen
 		
 		String verificationCode = (String) otpAuthentication.getCredentials();
 		
-		
-		Authentication authenticationToken = ((AuthenticationTokenProvider)previousAuthenticationProvider).getAuthenticationToken();
-		
-//		authenticationToken = previousAuthenticationProvider.authenticate(authenticationToken);
-		
-		if(authenticationToken == null || !authenticationToken.isAuthenticated()) {
-			throw new BadCredentialsException("Login errror-2!");
-		}
-		
 		if(!"123".equals(verificationCode)) {
 			throw new BadCredentialsException("Login errror-2!");
 		}
 		
 		otpAuthentication.setAuthenticated(true);
-		
-		this.otpAuthentication = otpAuthentication;
 		
 		return otpAuthentication;
 	}
@@ -53,19 +34,6 @@ public class OTPAuthenticationProvider implements AuthenticationProvider, Authen
         }
 		
 		return false;
-	}
-
-	public AuthenticationProvider getPreviousAuthenticationProvider() {
-		return previousAuthenticationProvider;
-	}
-
-	public void setPreviousAuthenticationProvider(AuthenticationProvider previousAuthenticationProvider) {
-		this.previousAuthenticationProvider = previousAuthenticationProvider;
-	}
-
-	@Override
-	public Authentication getAuthenticationToken() {
-		return this.otpAuthentication;
 	}
 
 }

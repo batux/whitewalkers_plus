@@ -5,17 +5,14 @@ import java.util.Set;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.whitewalkers.proxy.service.security.authentication.token.UsernamePasswordAuthenticationToken;
+public class LoginAuthenticationProvider implements AuthenticationProvider {
 
-public class LoginAuthenticationProvider implements AuthenticationProvider, AuthenticationTokenProvider {
-
-	private UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken;
-	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
@@ -31,8 +28,8 @@ public class LoginAuthenticationProvider implements AuthenticationProvider, Auth
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
 
-		this.usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginAuthentication.getPrincipal(), loginAuthentication.getCredentials(), grantedAuthorities);
-		return this.usernamePasswordAuthenticationToken;
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginAuthentication.getPrincipal(), loginAuthentication.getCredentials(), grantedAuthorities);
+		return usernamePasswordAuthenticationToken;
 	}
 
 	@Override
@@ -43,11 +40,6 @@ public class LoginAuthenticationProvider implements AuthenticationProvider, Auth
         }
 		
 		return false;
-	}
-
-	@Override
-	public Authentication getAuthenticationToken() {
-		return this.usernamePasswordAuthenticationToken;
 	}
 
 }

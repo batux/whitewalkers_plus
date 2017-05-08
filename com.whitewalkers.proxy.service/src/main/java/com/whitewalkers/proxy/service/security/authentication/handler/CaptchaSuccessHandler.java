@@ -17,6 +17,7 @@ public class CaptchaSuccessHandler extends SavedRequestAwareAuthenticationSucces
 	      ServletException {
 			
 			response.setStatus(200);
+			response.setHeader("X-Auth-Token", request.getHeader("X-Auth-Token"));
 //			response.sendRedirect("/otp");
 //			super.onAuthenticationSuccess(request, response, authentication);
 	  }
