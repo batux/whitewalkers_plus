@@ -1,6 +1,7 @@
 package com.whitewalkers.proxy.service.security.authentication;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.web.savedrequest.NullRequestCache;
 
 import com.whitewalkers.proxy.service.security.authentication.filter.CaptchaAuthenticationFilter;
 import com.whitewalkers.proxy.service.security.authentication.filter.OTPAuthenticationFilter;
+import com.whitewalkers.proxy.service.security.authentication.handler.CaptchaFailureHandler;
+import com.whitewalkers.proxy.service.security.authentication.handler.CaptchaSuccessHandler;
 import com.whitewalkers.proxy.service.security.authentication.handler.LoginFailureHandler;
 import com.whitewalkers.proxy.service.security.authentication.handler.LoginSuccessHandler;
 import com.whitewalkers.proxy.service.security.authentication.handler.LogoutSuccessHandler;
@@ -45,13 +48,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		otpAuthenticationFilter.setAuthenticationSuccessHandler(new OTPSuccessHandler());
 		otpAuthenticationFilter.setAuthenticationFailureHandler(new OTPFailureHandler());
 		otpAuthenticationFilter.setAllowSessionCreation(true);
-		otpAuthenticationFilter.setPreviousAuthenticationTokenClass(org.springframework.security.authentication.UsernamePasswordAuthenticationToken.class);
+		otpAuthenticationFilter.setPreviousAuthenticationTokenClass(UsernamePasswordAuthenticationToken.class);
 		
 		
 		CaptchaAuthenticationFilter captchaAuthenticationFilter = new CaptchaAuthenticationFilter("/captcha");
 		captchaAuthenticationFilter.setAuthenticationManager(authenticationManager());
-		captchaAuthenticationFilter.setAuthenticationSuccessHandler(new OTPSuccessHandler());
-		captchaAuthenticationFilter.setAuthenticationFailureHandler(new OTPFailureHandler());
+		captchaAuthenticationFilter.setAuthenticationSuccessHandler(new CaptchaSuccessHandler());
+		captchaAuthenticationFilter.setAuthenticationFailureHandler(new CaptchaFailureHandler());
 		captchaAuthenticationFilter.setAllowSessionCreation(true);
 		captchaAuthenticationFilter.setPreviousAuthenticationTokenClass(OTPAuthenticationToken.class);
 
